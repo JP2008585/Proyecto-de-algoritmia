@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ApexStudy | Configuración</title>
+    <style>
+      :root {
+        --paper: #07121f; --panel: rgba(15, 32, 50, 0.82); --ink: #e7fbff; --muted: #8eafbd;
+        --line: rgba(112, 226, 255, 0.16); --mint: #6fffe9; --mint-deep: #00c7b1;
+        --mint-soft: rgba(111, 255, 233, 0.12); --danger: #ff6680;
+        --shadow: 0 22px 55px rgba(0, 0, 0, 0.28);
+      }
+      * { box-sizing: border-box; }
+      @keyframes page-enter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes card-enter { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+      body { margin: 0; min-height: 100vh; font-family: "Inter", Arial, sans-serif; background: radial-gradient(circle at 15% 5%, rgba(0, 199, 177, 0.16), transparent 28%), linear-gradient(135deg, var(--paper), #0b1b2c); color: var(--ink); }
+      .page { width: min(940px, calc(100% - 28px)); margin: 0 auto; padding: 28px 0 48px; }
+      .topbar, .brand, .module-nav, .actions { display: flex; align-items: center; }
+      .topbar { justify-content: space-between; gap: 18px; margin-bottom: 24px; }
+      .topbar { animation: page-enter .55s ease both; }
+      .brand { gap: 12px; font-weight: 700; letter-spacing: -0.04em; }
+      .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: linear-gradient(135deg, var(--mint), var(--mint-deep)); color: #fff; }
+      .brand-area { display: flex; align-items: center; gap: 22px; }
+      .module-nav { gap: 6px; }
+      .module-link { padding: 8px 11px; border-radius: 999px; color: var(--muted); font-size: 0.78rem; font-weight: 700; text-decoration: none; transition: transform .2s ease, color .2s ease, background .2s ease; }
+      .module-link:hover, .module-link.active { background: var(--mint-soft); color: var(--mint-deep); }
+      .module-link:hover { transform: translateY(-2px); }
+      .actions { gap: 10px; }
+      .button { border: 0; border-radius: 999px; padding: 11px 17px; font-weight: 700; text-decoration: none; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, filter .2s ease; }
+      .button:hover { transform: translateY(-3px); box-shadow: 0 14px 28px rgba(20,34,38,.12); filter: brightness(1.03); }
+      .button:active { transform: scale(.96); }
+      .secondary { color: var(--ink); background: var(--panel); box-shadow: var(--shadow); }
+      .primary { color: #fff; background: linear-gradient(135deg, var(--mint), var(--mint-deep)); }
+      .intro, .card { background: linear-gradient(145deg, rgba(17, 44, 63, 0.88), rgba(9, 27, 43, 0.78)); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); }
+      .intro { padding: 28px; margin-bottom: 20px; animation: page-enter .55s ease .08s both; }
+      .eyebrow { margin: 0 0 10px; color: var(--mint-deep); font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+      h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.3rem); letter-spacing: -.07em; }
+      .intro p:last-child { margin: 14px 0 0; color: var(--muted); }
+      .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+      .card { padding: 22px; animation: card-enter .55s ease .16s both; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+      .card:hover { transform: translateY(-5px); border-color: rgba(30,168,122,.28); box-shadow: 0 24px 44px rgba(20,34,38,.11); }
+      .card:nth-child(2) { animation-delay: .24s; }
+      .card:nth-child(3) { animation-delay: .32s; }
+      .danger-card { grid-column: 1 / -1; border-color: rgba(180, 35, 60, 0.22); }
+      .danger-card p { color: var(--muted); line-height: 1.5; }
+      .button.danger { color: #fff; background: var(--danger); }
+      .button.danger:hover { background: #8f1d31; }
+      .button:disabled { opacity: 0.6; cursor: wait; }
+      .card h2 { margin: 0 0 18px; font-size: 1.15rem; }
+      .fields { display: grid; gap: 14px; }
+      .field { display: grid; gap: 6px; }
+      label { color: var(--muted); font-size: .76rem; font-weight: 700; }
+      input { width: 100%; border: 1px solid var(--line); border-radius: 11px; background: rgba(4, 19, 32, 0.8); color: var(--ink); padding: 11px; font: inherit; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+      input:focus { outline: 2px solid var(--mint); outline-offset: 1px; box-shadow: 0 6px 16px rgba(30,168,122,.12); transform: translateY(-1px); }
+      input[readonly] { color: var(--muted); background: rgba(4, 19, 32, 0.55); }
+      .form-actions { display: flex; justify-content: flex-end; margin-top: 18px; }
+      .message { display: none; margin-top: 14px; color: var(--mint-deep); font-weight: 700; }
+      .message.error { color: var(--danger); }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      }
+      @media (max-width: 760px) {
+        .topbar, .brand-area { align-items: flex-start; flex-direction: column; gap: 10px; }
+        .module-nav { flex-wrap: wrap; }
+        .actions { width: 100%; flex-wrap: wrap; }
+        .grid { grid-template-columns: 1fr; }
+      }
+      @media (min-width: 761px) {
+        body { padding-left: 228px; }
+        .topbar {
+          position: fixed;
+          z-index: 10;
+          inset: 0 auto 0 0;
+          width: 208px;
+          min-height: 100vh;
+          margin: 0;
+          padding: 28px 16px;
+          flex-direction: column;
+          align-items: stretch;
+          justify-content: flex-start;
+          gap: 28px;
+          border-right: 1px solid var(--line);
+          background: rgba(9, 27, 43, .9);
+          backdrop-filter: blur(16px);
+        }
+        .brand-area { flex-direction: column; align-items: stretch; gap: 18px; }
+        .module-nav { flex-direction: column; align-items: stretch; gap: 8px; }
+        .module-link { display: block; }
+        .actions { flex-direction: column; margin-top: auto; }
+      }
+
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <div class="brand-area">
+          <div class="brand"><span class="brand-mark">A</span><span>ApexStudy</span></div>
+          <nav class="module-nav" aria-label="Módulos">
+            <a class="module-link" href="/dashboard.html">Dashboard</a>
+            <a class="module-link" href="/materias.html">Materias</a>
+            <a class="module-link" href="/recomendaciones.html">Recomendaciones</a>
+            <a class="module-link active" href="/configuracion.html">Configuración</a>
+          </nav>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="/ApexStudy_Informe_Proyecto.pdf" download="ApexStudy_Informe_Proyecto.pdf">
+            Descargar informe
+          </a>
+          <button class="button secondary" type="button" onclick="logout()">Cerrar sesión</button>
+        </div>
+      </header>
+
+      <section class="intro">
+        <p class="eyebrow">Cuenta personal</p>
+        <h1>Configuración</h1>
+      </section>
+
+      <section class="grid">
+        <form class="card" id="profileForm">
+          <h2>Perfil de usuario</h2>
+          <div class="fields">
+            <div class="field"><label for="name">Nombre</label><input id="name" required /></div>
+            <div class="field"><label for="email">Correo</label><input id="email" readonly /></div>
+            <div class="field"><label for="university">Universidad</label><input id="university" placeholder="Tu universidad" /></div>
+            <div class="field"><label for="career">Carrera</label><input id="career" placeholder="Ingeniería de Sistemas" /></div>
+          </div>
+          <div class="form-actions"><button class="button primary" type="submit">Guardar perfil</button></div>
+          <p class="message" id="profileMessage" aria-live="polite"></p>
+        </form>
+
+        <form class="card" id="passwordForm">
+          <h2>Cambiar contraseña</h2>
+          <div class="fields">
+            <div class="field"><label for="currentPassword">Contraseña actual</label><input id="currentPassword" type="password" required /></div>
+            <div class="field"><label for="newPassword">Nueva contraseña</label><input id="newPassword" type="password" minlength="6" required /></div>
+            <div class="field"><label for="confirmPassword">Confirmar nueva contraseña</label><input id="confirmPassword" type="password" minlength="6" required /></div>
+          </div>
+          <div class="form-actions"><button class="button primary" type="submit">Cambiar contraseña</button></div>
+          <p class="message" id="passwordMessage" aria-live="polite"></p>
+        </form>
+
+        <section class="card danger-card">
+          <h2>Eliminar cuenta</h2>
+          <p>Esta acción elimina tu cuenta de forma permanente y no se puede deshacer.</p>
+          <button class="button danger" type="button" id="deleteAccountButton">Eliminar mi cuenta</button>
+          <p class="message" id="deleteMessage" aria-live="polite"></p>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      const token = sessionStorage.getItem("studytrack_token");
+      const API_BASE = `${window.location.origin}/api/auth`;
+      if (!token) window.location.href = "/";
+
+      async function request(path, options = {}) {
+        const response = await fetch(`${API_BASE}${path}`, {
+          ...options,
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, ...(options.headers || {}) }
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || "No se pudo completar la solicitud");
+        return data;
+      }
+
+      function showMessage(id, message, isError = false) {
+        const element = document.getElementById(id);
+        element.textContent = message;
+        element.classList.toggle("error", isError);
+        element.style.display = "block";
+      }
+
+      async function loadProfile() {
+        try {
+          const profile = await request("/profile");
+          document.getElementById("name").value = profile.name;
+          document.getElementById("email").value = profile.email;
+          document.getElementById("university").value = profile.university;
+          document.getElementById("career").value = profile.career;
+        } catch (error) {
+          showMessage("profileMessage", error.message, true);
+        }
+      }
+
+      document.getElementById("profileForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        try {
+          await request("/profile", { method: "PUT", body: JSON.stringify({
+            name: document.getElementById("name").value,
+            university: document.getElementById("university").value,
+            career: document.getElementById("career").value
+          }) });
+          showMessage("profileMessage", "Perfil actualizado correctamente.");
+        } catch (error) {
+          showMessage("profileMessage", error.message, true);
+        }
+      });
+
+      document.getElementById("passwordForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        const newPassword = document.getElementById("newPassword").value;
+        if (newPassword !== document.getElementById("confirmPassword").value) {
+          showMessage("passwordMessage", "Las nuevas contraseñas no coinciden.", true);
+          return;
+        }
+        try {
+          await request("/password", { method: "PUT", body: JSON.stringify({
+            currentPassword: document.getElementById("currentPassword").value,
+            newPassword
+          }) });
+          event.target.reset();
+          showMessage("passwordMessage", "Contraseña actualizada correctamente.");
+        } catch (error) {
+          showMessage("passwordMessage", error.message, true);
+        }
+      });
+
+      document.getElementById("deleteAccountButton").addEventListener("click", async () => {
+        const confirmed = window.confirm(
+          "¿Estás seguro de eliminar tu cuenta?\n\nSe borrará tu cuenta permanentemente y no podrás recuperar tus datos."
+        );
+        if (!confirmed) {
+          showMessage("deleteMessage", "La cuenta no se eliminó.");
+          return;
+        }
+
+        const button = document.getElementById("deleteAccountButton");
+        button.disabled = true;
+        try {
+          await request("/profile", { method: "DELETE" });
+          sessionStorage.removeItem("studytrack_token");
+          localStorage.removeItem("studytrack_subjects");
+          localStorage.removeItem("studytrack_study_timer");
+          window.location.href = "/";
+        } catch (error) {
+          button.disabled = false;
+          showMessage("deleteMessage", error.message, true);
+        }
+      });
+
+      function logout() {
+        sessionStorage.removeItem("studytrack_token");
+        window.location.href = "/";
+      }
+
+      loadProfile();
+    </script>
+  </body>
+</html>

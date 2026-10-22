@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ApexStudy | Acceder</title>
+    <meta
+      name="description"
+      content="Inicia sesión o crea tu cuenta en ApexStudy para organizar tus notas y metas académicas."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="auth.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="auth-header">
+        <a class="brand" href="index.html" aria-label="Volver a inicio">
+          <span class="brand-mark">A</span>
+          <span>ApexStudy</span>
+        </a>
+      </header>
+
+      <main class="auth-layout">
+        <section class="auth-copy">
+          <p class="eyebrow">Tu proyecto académico, ordenado</p>
+          <h1>Organiza tu semestre sin perder de vista lo importante.</h1>
+          <p class="lead">
+            Lleva tus notas, tus entregas y tus metas en un solo lugar para estudiar con
+            más calma y más estrategia.
+          </p>
+
+          <div class="mini-panel" aria-label="Resumen de uso">
+            <div>
+              <strong>4.1</strong>
+              <span>Promedio actual</span>
+            </div>
+            <div>
+              <strong>8</strong>
+              <span>Materias activas</span>
+            </div>
+            <div>
+              <strong>2 días</strong>
+              <span>Próxima entrega</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="auth-card" aria-label="Formulario de acceso">
+          <div class="tab-switcher" role="tablist" aria-label="Opciones de acceso">
+            <input type="radio" name="auth-tabs" id="login-tab" checked />
+            <label for="login-tab" role="tab" aria-controls="login-panel">Iniciar sesión</label>
+
+            <input type="radio" name="auth-tabs" id="signup-tab" />
+            <label for="signup-tab" role="tab" aria-controls="signup-panel">Crear cuenta</label>
+          </div>
+
+          <div class="panel login-panel" id="login-panel">
+            <h2>Bienvenido otra vez</h2>
+            <form class="auth-form">
+              <div class="field-group">
+                <label for="login-email">Correo electrónico</label>
+                <input id="login-email" type="email" placeholder="tucorreo@uni.edu" />
+              </div>
+
+              <div class="field-group">
+                <label for="login-password">Contraseña</label>
+                <input id="login-password" type="password" placeholder="••••••••" />
+              </div>
+
+              <div class="form-row">
+                <label class="checkbox-row">
+                  <input type="checkbox" />
+                  <span>Recordarme</span>
+                </label>
+                <a href="#" class="link-muted">¿Olvidaste tu contraseña?</a>
+              </div>
+
+              <button type="submit" class="button button-primary">Entrar</button>
+            </form>
+          </div>
+
+          <div class="panel signup-panel" id="signup-panel">
+            <h2>Crea tu cuenta</h2>
+            <form class="auth-form">
+              <div class="field-group">
+                <label for="signup-name">Nombre completo</label>
+                <input id="signup-name" type="text" placeholder="Ana García" />
+              </div>
+
+              <div class="field-group">
+                <label for="signup-university">Universidad o carrera</label>
+                <input id="signup-university" type="text" placeholder="Ingeniería de Sistemas" />
+              </div>
+
+              <div class="field-group">
+                <label for="signup-email">Correo institucional</label>
+                <input id="signup-email" type="email" placeholder="ana@uni.edu" />
+              </div>
+
+              <div class="field-group">
+                <label for="signup-password">Contraseña</label>
+                <input id="signup-password" type="password" placeholder="Crea una contraseña" />
+              </div>
+
+              <button type="submit" class="button button-primary">Crear cuenta gratis</button>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

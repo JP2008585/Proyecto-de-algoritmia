@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ApexStudy | Editar materias</title>
+    <style>
+      :root {
+        --paper: #07121f;
+        --panel: rgba(15, 32, 50, 0.82);
+        --ink: #e7fbff;
+        --muted: #8eafbd;
+        --line: rgba(112, 226, 255, 0.16);
+        --mint: #6fffe9;
+        --mint-deep: #00c7b1;
+        --mint-soft: rgba(111, 255, 233, 0.12);
+        --shadow: 0 22px 55px rgba(0, 0, 0, 0.28);
+      }
+      * { box-sizing: border-box; }
+      @keyframes page-enter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes card-enter { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Inter", Arial, sans-serif;
+        background: radial-gradient(circle at 15% 5%, rgba(0, 199, 177, 0.16), transparent 28%), linear-gradient(135deg, var(--paper), #0b1b2c);
+        color: var(--ink);
+      }
+      .page {
+        width: min(1120px, calc(100% - 28px));
+        margin: 0 auto;
+        padding: 28px 0 48px;
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+        animation: page-enter .55s ease both;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--mint), var(--mint-deep));
+        color: #fff;
+      }
+      .brand-area {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+      .module-nav {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .module-link {
+        padding: 8px 11px;
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: transform .2s ease, color .2s ease, background .2s ease;
+      }
+      .module-link:hover,
+      .module-link.active {
+        background: var(--mint-soft);
+        color: var(--mint-deep);
+      }
+      .module-link:hover { transform: translateY(-2px); }
+      .actions { display: flex; gap: 10px; }
+      .link-button, .save-button {
+        border: 0;
+        border-radius: 999px;
+        padding: 11px 17px;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+      }
+      .link-button:hover, .save-button:hover { transform: translateY(-3px); box-shadow: 0 14px 28px rgba(20,34,38,.12); filter: brightness(1.03); }
+      .link-button:active, .save-button:active { transform: scale(.96); }
+      .link-button {
+        color: var(--ink);
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+      .save-button {
+        color: #fff;
+        background: linear-gradient(135deg, var(--mint), var(--mint-deep));
+      }
+      .intro, .subject-editor {
+        background: linear-gradient(145deg, rgba(17, 44, 63, 0.88), rgba(9, 27, 43, 0.78));
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+      }
+      .intro {
+        padding: 28px;
+        margin-bottom: 20px;
+        animation: page-enter .55s ease .08s both;
+      }
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--mint-deep);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        letter-spacing: -0.07em;
+      }
+      .intro p:last-child {
+        margin: 14px 0 0;
+        color: var(--muted);
+      }
+      .subject-editor {
+        padding: 22px;
+        margin-bottom: 16px;
+        animation: card-enter .55s ease both;
+        transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      }
+      .subject-editor:hover { transform: translateY(-5px); border-color: rgba(30,168,122,.28); box-shadow: 0 24px 44px rgba(20,34,38,.11); }
+      .subject-editor:nth-child(2) { animation-delay: .08s; }
+      .subject-editor:nth-child(3) { animation-delay: .16s; }
+      .subject-editor:nth-child(4) { animation-delay: .24s; }
+      .subject-editor:nth-child(5) { animation-delay: .32s; }
+      .subject-editor:nth-child(6) { animation-delay: .4s; }
+      .subject-title {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+      .subject-title h2 { margin: 0; font-size: 1.15rem; }
+      .subject-tag {
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: var(--mint-soft);
+        color: var(--mint-deep);
+        font-size: 0.75rem;
+        font-weight: 800;
+      }
+      .fields {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .field { display: grid; gap: 6px; }
+      label {
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+      }
+      input {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        background: rgba(4, 19, 32, 0.8);
+        color: var(--ink);
+        padding: 10px 11px;
+        font: inherit;
+        transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+      }
+      input:focus {
+        outline: 2px solid var(--mint);
+        outline-offset: 1px;
+        box-shadow: 0 6px 16px rgba(30,168,122,.12);
+        transform: translateY(-1px);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      }
+      .save-row {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 22px;
+      }
+      .notice {
+        display: none;
+        margin-top: 16px;
+        color: var(--mint-deep);
+        font-weight: 700;
+        text-align: center;
+      }
+      @media (max-width: 760px) {
+        .topbar { align-items: flex-start; flex-direction: column; }
+        .brand-area { align-items: flex-start; flex-direction: column; gap: 10px; }
+        .fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (max-width: 500px) {
+        .fields { grid-template-columns: 1fr; }
+        .actions { width: 100%; }
+        .actions > * { flex: 1; text-align: center; }
+      }
+      @media (min-width: 761px) {
+        body { padding-left: 228px; }
+        .topbar {
+          position: fixed;
+          z-index: 10;
+          inset: 0 auto 0 0;
+          width: 208px;
+          min-height: 100vh;
+          margin: 0;
+          padding: 28px 16px;
+          flex-direction: column;
+          align-items: stretch;
+          justify-content: flex-start;
+          gap: 28px;
+          border-right: 1px solid var(--line);
+          background: rgba(7, 24, 39, .94);
+          backdrop-filter: blur(16px);
+        }
+        .brand-area { flex-direction: column; align-items: stretch; gap: 18px; }
+        .module-nav { flex-direction: column; align-items: stretch; gap: 8px; }
+        .module-link { display: block; }
+        .actions { flex-direction: column; margin-top: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <div class="brand-area">
+          <div class="brand"><span class="brand-mark">A</span><span>ApexStudy</span></div>
+          <nav class="module-nav" aria-label="Módulos">
+            <a class="module-link" href="/dashboard.html">Dashboard</a>
+            <a class="module-link active" href="/materias.html">Materias</a>
+            <a class="module-link" href="/recomendaciones.html">Recomendaciones</a>
+            <a class="module-link" href="/configuracion.html">Configuración</a>
+          </nav>
+        </div>
+        <div class="actions">
+          <button class="link-button" type="button" onclick="logout()">Cerrar sesión</button>
+        </div>
+      </header>
+
+      <section class="intro">
+        <p class="eyebrow">Semestre 2 · Ingeniería de Sistemas</p>
+        <h1>Editar datos de materias</h1>
+      </section>
+
+      <form id="subjectsForm">
+        <div id="subjectsEditor"></div>
+        <div class="save-row"><button class="save-button" type="submit">Guardar cambios</button></div>
+        <div class="notice" id="notice">Cambios guardados correctamente.</div>
+      </form>
+    </main>
+
+    <script>
+      const token = sessionStorage.getItem("studytrack_token");
+      if (!token) window.location.href = "/";
+
+      const STORAGE_KEY = "studytrack_subjects";
+      const defaults = Array.from({ length: 6 }, (_, index) => ({
+        name: `Materia ${index + 1}`,
+        short: `M${index + 1}`,
+        corte1: 0,
+        corte2: 0,
+        corte3: 0,
+        participation: 0,
+        attendance: 0,
+        tasks: 0
+      }));
+
+      function getSubjects() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+          return Array.isArray(saved) && saved.length ? saved : defaults;
+        } catch (error) {
+          return defaults;
+        }
+      }
+
+      function render() {
+        document.getElementById("subjectsEditor").innerHTML = getSubjects().map((subject, index) => `
+          <section class="subject-editor">
+            <div class="subject-title"><h2>${subject.name}</h2><span class="subject-tag">${subject.short}</span></div>
+            <div class="fields">
+              <div class="field"><label>Nombre</label><input name="name-${index}" value="${subject.name}" /></div>
+              <div class="field"><label>Abreviatura</label><input name="short-${index}" value="${subject.short}" /></div>
+              <div class="field"><label>¿En qué te vas a enfocar?</label><input name="focus-${index}" value="${subject.focus || ""}" placeholder="Parcial, proyecto, asistencia..." /></div>
+              <div class="field"><label>Corte 1 (30%)</label><input name="corte1-${index}" type="number" min="0" max="5" step="0.1" value="${subject.corte1 ?? subject.grade ?? 0}" /></div>
+              <div class="field"><label>Corte 2 (30%)</label><input name="corte2-${index}" type="number" min="0" max="5" step="0.1" value="${subject.corte2 ?? subject.grade ?? 0}" /></div>
+              <div class="field"><label>Corte 3 (40%)</label><input name="corte3-${index}" type="number" min="0" max="5" step="0.1" value="${subject.corte3 ?? subject.grade ?? 0}" /></div>
+              <div class="field"><label>Participación</label><input name="participation-${index}" type="number" min="0" max="5" step="0.1" value="${subject.participation || 0}" /></div>
+              <div class="field"><label>Asistencia %</label><input name="attendance-${index}" type="number" min="0" max="100" value="${subject.attendance || 0}" /></div>
+              <div class="field"><label>Tareas</label><input name="tasks-${index}" type="number" min="0" value="${subject.tasks || 0}" /></div>
+            </div>
+          </section>
+        `).join("");
+      }
+
+      document.getElementById("subjectsForm").addEventListener("submit", event => {
+        event.preventDefault();
+        const form = event.target;
+        const subjects = getSubjects();
+        subjects.forEach((subject, index) => {
+          subject.name = form.elements[`name-${index}`].value.trim() || subject.name;
+          subject.short = form.elements[`short-${index}`].value.trim() || subject.short;
+          subject.focus = form.elements[`focus-${index}`].value.trim();
+          subject.corte1 = Math.min(5, Math.max(0, Number(form.elements[`corte1-${index}`].value) || 0));
+          subject.corte2 = Math.min(5, Math.max(0, Number(form.elements[`corte2-${index}`].value) || 0));
+          subject.corte3 = Math.min(5, Math.max(0, Number(form.elements[`corte3-${index}`].value) || 0));
+          subject.participation = Math.min(5, Math.max(0, Number(form.elements[`participation-${index}`].value) || 0));
+          subject.attendance = Math.min(100, Math.max(0, Number(form.elements[`attendance-${index}`].value) || 0));
+          subject.tasks = Math.max(0, Number(form.elements[`tasks-${index}`].value) || 0);
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(subjects));
+        const notice = document.getElementById("notice");
+        notice.style.display = "block";
+        setTimeout(() => { notice.style.display = "none"; }, 2500);
+      });
+
+      function logout() {
+        sessionStorage.removeItem("studytrack_token");
+        window.location.href = "/";
+      }
+
+      render();
+    </script>
+  </body>
+</html>

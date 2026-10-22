@@ -1,0 +1,400 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ApexStudy | Recomendaciones</title>
+    <style>
+      :root {
+        --paper: #07121f;
+        --panel: rgba(15, 32, 50, 0.82);
+        --ink: #e7fbff;
+        --muted: #8eafbd;
+        --line: rgba(112, 226, 255, 0.16);
+        --mint: #6fffe9;
+        --mint-deep: #00c7b1;
+        --mint-soft: rgba(111, 255, 233, 0.12);
+        --shadow: 0 22px 55px rgba(0, 0, 0, 0.28);
+      }
+
+      * { box-sizing: border-box; }
+      @keyframes page-enter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes card-enter { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Inter", Arial, sans-serif;
+        background: radial-gradient(circle at 15% 5%, rgba(0, 199, 177, 0.16), transparent 28%), linear-gradient(135deg, var(--paper), #0b1b2c);
+        color: var(--ink);
+      }
+
+      .page {
+        width: min(1050px, calc(100% - 28px));
+        margin: 0 auto;
+        padding: 28px 0 48px;
+      }
+
+      .topbar,
+      .actions,
+      .subject-heading {
+        display: flex;
+        align-items: center;
+      }
+
+      .topbar,
+      .subject-heading {
+        justify-content: space-between;
+      }
+
+      .topbar {
+        gap: 16px;
+        margin-bottom: 24px;
+        animation: page-enter .55s ease both;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--mint), var(--mint-deep));
+        color: #fff;
+      }
+      .brand-area {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+      .module-nav {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .module-link {
+        padding: 8px 11px;
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: transform .2s ease, color .2s ease, background .2s ease;
+      }
+      .module-link:hover,
+      .module-link.active {
+        background: var(--mint-soft);
+        color: var(--mint-deep);
+      }
+      .module-link:hover { transform: translateY(-2px); }
+
+      .actions {
+        gap: 10px;
+      }
+
+      .link-button,
+      .save-button {
+        border: 0;
+        border-radius: 999px;
+        padding: 11px 17px;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+      }
+      .link-button:hover, .save-button:hover { transform: translateY(-3px); box-shadow: 0 14px 28px rgba(20,34,38,.12); filter: brightness(1.03); }
+      .link-button:active, .save-button:active { transform: scale(.96); }
+
+      .link-button {
+        color: var(--ink);
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .save-button {
+        color: #fff;
+        background: linear-gradient(135deg, var(--mint), var(--mint-deep));
+      }
+
+      .intro,
+      .subject-card {
+        background: linear-gradient(145deg, rgba(17, 44, 63, 0.88), rgba(9, 27, 43, 0.78));
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+      }
+
+      .intro {
+        padding: 28px;
+        margin-bottom: 20px;
+        animation: page-enter .55s ease .08s both;
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--mint-deep);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        letter-spacing: -0.07em;
+      }
+
+      .intro p:last-child {
+        margin: 14px 0 0;
+        color: var(--muted);
+      }
+
+      .subjects {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .subject-card {
+        padding: 16px;
+        animation: card-enter .55s ease both;
+        transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      }
+      .subject-card:hover { transform: translateY(-5px); border-color: rgba(30,168,122,.28); box-shadow: 0 24px 44px rgba(20,34,38,.11); }
+      .subject-card:nth-child(2) { animation-delay: .08s; }
+      .subject-card:nth-child(3) { animation-delay: .16s; }
+      .subject-card:nth-child(4) { animation-delay: .24s; }
+      .subject-card:nth-child(5) { animation-delay: .32s; }
+      .subject-card:nth-child(6) { animation-delay: .4s; }
+
+      .subject-heading {
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+
+      .subject-heading h2 {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .subject-tag {
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: var(--mint-soft);
+        color: var(--mint-deep);
+        font-size: 0.75rem;
+        font-weight: 800;
+      }
+
+      .focus {
+        margin: 0 0 9px;
+        color: var(--muted);
+        font-size: 0.76rem;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 92px;
+        resize: vertical;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        background: rgba(4, 19, 32, 0.8);
+        color: var(--ink);
+        padding: 10px;
+        font: inherit;
+        line-height: 1.4;
+        transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+      }
+
+      textarea:focus {
+        outline: 2px solid var(--mint);
+        outline-offset: 1px;
+        box-shadow: 0 6px 16px rgba(30,168,122,.12);
+        transform: translateY(-1px);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      }
+
+      .save-row {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 22px;
+      }
+
+      .notice {
+        display: none;
+        margin-top: 16px;
+        color: var(--mint-deep);
+        font-weight: 700;
+        text-align: center;
+        animation: card-enter .35s ease both;
+      }
+
+      @media (max-width: 720px) {
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .brand-area {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .actions {
+          width: 100%;
+          flex-wrap: wrap;
+        }
+
+        .subjects {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (min-width: 721px) {
+        body { padding-left: 228px; }
+        .topbar {
+          position: fixed;
+          z-index: 10;
+          inset: 0 auto 0 0;
+          width: 208px;
+          min-height: 100vh;
+          margin: 0;
+          padding: 24px 14px;
+          flex-direction: column;
+          align-items: stretch;
+          justify-content: flex-start;
+          gap: 24px;
+          border: 1px solid rgba(30, 168, 122, .14);
+          border-left: 0;
+          border-radius: 0 24px 24px 0;
+          background: rgba(7, 24, 39, .94);
+          box-shadow: 12px 0 35px rgba(20, 34, 38, .08);
+          backdrop-filter: blur(16px);
+        }
+        .brand-area { flex-direction: column; align-items: stretch; gap: 22px; }
+        .brand {
+          padding: 10px;
+          border-radius: 16px;
+          background: linear-gradient(135deg, rgba(0, 199, 177, .2), rgba(15, 42, 61, .72));
+        }
+        .module-nav { flex-direction: column; align-items: stretch; gap: 6px; }
+        .module-link {
+          display: flex;
+          align-items: center;
+          min-height: 42px;
+          padding: 10px 12px;
+          border-radius: 12px;
+        }
+        .module-link.active {
+          box-shadow: inset 3px 0 0 var(--mint-deep);
+        }
+        .actions { flex-direction: column; margin-top: auto; gap: 8px; }
+        .actions .link-button { text-align: center; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <div class="brand-area">
+          <div class="brand">
+            <span class="brand-mark">A</span>
+            <span>ApexStudy</span>
+          </div>
+          <nav class="module-nav" aria-label="Módulos">
+            <a class="module-link" href="/dashboard.html">Dashboard</a>
+            <a class="module-link" href="/materias.html">Materias</a>
+            <a class="module-link active" href="/recomendaciones.html">Recomendaciones</a>
+            <a class="module-link" href="/configuracion.html">Configuración</a>
+          </nav>
+        </div>
+        <div class="actions">
+          <button class="link-button" type="button" onclick="logout()">Cerrar sesión</button>
+        </div>
+      </header>
+
+      <section class="intro">
+        <p class="eyebrow">Semestre 2 · Ingeniería de Sistemas</p>
+        <h1>Recomendaciones por materia</h1>
+      </section>
+
+      <form id="recommendationsForm">
+        <section class="subjects" id="subjects"></section>
+        <div class="save-row">
+          <button class="save-button" type="submit">Guardar recomendaciones</button>
+        </div>
+        <div class="notice" id="notice">Recomendaciones guardadas correctamente.</div>
+      </form>
+    </main>
+
+    <script>
+      const token = sessionStorage.getItem("studytrack_token");
+      if (!token) window.location.href = "/";
+
+      const STORAGE_KEY = "studytrack_subjects";
+      const fallbackSubjects = [
+        { name: "Programación Web", short: "Web" },
+        { name: "Base de Datos", short: "DB" },
+        { name: "Algoritmia", short: "Algo" },
+        { name: "Matemática Discreta", short: "MD" },
+        { name: "Sistemas Operativos", short: "SO" },
+        { name: "Arquitectura de Computadores", short: "AC" }
+      ];
+
+      function getSubjects() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+          return Array.isArray(saved) && saved.length ? saved : fallbackSubjects;
+        } catch (error) {
+          return fallbackSubjects;
+        }
+      }
+
+      function render() {
+        document.getElementById("subjects").innerHTML = getSubjects().map((subject, index) => `
+          <article class="subject-card">
+            <div class="subject-heading">
+              <h2>${subject.name}</h2>
+              <span class="subject-tag">${subject.short}</span>
+            </div>
+            <p class="focus"><strong>Foco:</strong> ${subject.focus || "Sin foco definido"}</p>
+            <textarea id="recommendation-${index}" name="recommendation-${index}" placeholder="Escribe aquí una recomendación para esta materia...">${subject.recommendation || ""}</textarea>
+          </article>
+        `).join("");
+      }
+
+      document.getElementById("recommendationsForm").addEventListener("submit", event => {
+        event.preventDefault();
+        const form = event.target;
+        const subjects = getSubjects();
+
+        subjects.forEach((subject, index) => {
+          subject.recommendation = form.elements[`recommendation-${index}`].value.trim();
+        });
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(subjects));
+        const notice = document.getElementById("notice");
+        notice.style.display = "block";
+        notice.textContent = "Recomendaciones guardadas correctamente.";
+        setTimeout(() => { notice.style.display = "none"; }, 2500);
+      });
+
+      function logout() {
+        sessionStorage.removeItem("studytrack_token");
+        window.location.href = "/";
+      }
+
+      render();
+    </script>
+  </body>
+</html>

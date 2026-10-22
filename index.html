@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ApexStudy</title>
+    <meta
+      name="description"
+      content="ApexStudy organiza tus materias, calcula tu nota ideal y prioriza tu esfuerzo antes de cada entrega."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <div class="brand" aria-label="ApexStudy">
+          <span class="brand-mark">A</span>
+          <span>ApexStudy</span>
+        </div>
+
+        <nav class="nav-links" aria-label="Navegación principal">
+          <a href="#funciones">Funciones</a>
+          <a href="#nosotros">Nosotros</a>
+          <a href="#empezar">Empezar</a>
+        </nav>
+
+        <a class="button button-primary" href="#auth">Crear cuenta</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="container hero-content">
+          <div class="hero-copy">
+            <p class="eyebrow">Tu promedio, bajo control</p>
+            <h1>Sabe siempre qué nota necesitas para llegar a tu meta</h1>
+            <p class="lead">
+              ApexStudy organiza tus materias, calcula lo que te falta y te recuerda
+              qué priorizar antes de cada entrega.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button button-primary" href="#auth">Crear cuenta gratis</a>
+              <a class="button button-secondary" href="#funciones">Ver cómo funciona</a>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Panel de rendimiento académico">
+            <div class="score-panel">
+              <div class="panel-header">
+                <span class="panel-dot"></span>
+                <span class="panel-dot"></span>
+                <span class="panel-dot"></span>
+              </div>
+
+              <div class="panel-body">
+                <div class="subject-row">
+                  <span>Base de datos</span>
+                  <strong>3.8</strong>
+                </div>
+                <div class="subject-row">
+                  <span>Programación web</span>
+                  <strong>4.5</strong>
+                </div>
+                <div class="subject-row highlight">
+                  <span>Próxima entrega</span>
+                  <strong>2 días</strong>
+                </div>
+                <div class="subject-row">
+                  <span>Promedio actual</span>
+                  <strong>4.1</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="features" id="funciones">
+        <div class="container section-wrap">
+          <div class="section-heading">
+            <p class="eyebrow accent">Lo que hace por ti</p>
+            <h2>Todo lo que necesitas para dejar de improvisar cada semestre.</h2>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-item">
+              <div class="feature-number">01</div>
+              <h3>Calculadora de nota</h3>
+              <p>
+                Ingresa lo que llevas y te decimos exactamente qué necesitas sacar en lo
+                que falta.
+              </p>
+            </article>
+
+            <article class="feature-item">
+              <div class="feature-number">02</div>
+              <h3>Recordatorios por peso</h3>
+              <p>
+                Prioriza lo que más afecta tu promedio, no solo lo que vence primero.
+              </p>
+            </article>
+
+            <article class="feature-item">
+              <div class="feature-number">03</div>
+              <h3>Panel por materia</h3>
+              <p>
+                Visualiza tu progreso en cada curso de un vistazo, sin abrir diez pestañas.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="about" id="nosotros">
+        <div class="container about-grid">
+          <div class="about-copy">
+            <p class="eyebrow accent">Nosotros</p>
+            <h2>
+              Somos estudiantes construyendo la herramienta que nos hubiera gustado tener
+              desde primer semestre.
+            </h2>
+            <p class="about-text">
+              Menos hojas de cálculo sueltas, más claridad sobre dónde parar el esfuerzo.
+            </p>
+
+            <ul class="check-list">
+              <li>Nacido de un proyecto universitario real</li>
+              <li>Pensado para cualquier carrera</li>
+              <li>Datos privados, solo tuyos</li>
+            </ul>
+          </div>
+
+          <div class="chart-card" aria-label="Gráfico de desempeño por materia">
+            <div class="chart-box">
+              <div class="bar-group">
+                <span class="bar bar-one"></span>
+                <label>Historia</label>
+              </div>
+              <div class="bar-group">
+                <span class="bar bar-two"></span>
+                <label>Diseño</label>
+              </div>
+              <div class="bar-group">
+                <span class="bar bar-three"></span>
+                <label>Algoritmia</label>
+              </div>
+              <div class="bar-group">
+                <span class="bar bar-four"></span>
+                <label>Bioquímica</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="empezar">
+        <div class="container cta-box">
+          <div class="cta-copy">
+            <p class="eyebrow accent">Plataforma pensada para estudiar mejor</p>
+            <h2>Deja de calcular tu promedio a mano</h2>
+            <p>
+              Crea tu cuenta en menos de un minuto y agrega tu primera materia.
+            </p>
+          </div>
+
+          <a class="button button-primary" href="#auth">Crear cuenta gratis</a>
+        </div>
+      </section>
+
+      <section class="auth-section" id="auth">
+        <div class="container auth-shell">
+          <div class="auth-copy">
+            <p class="eyebrow">Tu proyecto académico, ordenado</p>
+            <h2>Organiza tu semestre sin perder de vista lo importante.</h2>
+            <p class="lead">
+              Lleva tus notas, tus entregas y tus metas en un solo lugar para estudiar
+              con más calma y más estrategia.
+            </p>
+
+            <div class="mini-panel" aria-label="Resumen de uso">
+              <div>
+                <strong>4.1</strong>
+                <span>Promedio actual</span>
+              </div>
+              <div>
+                <strong>8</strong>
+                <span>Materias activas</span>
+              </div>
+              <div>
+                <strong>2 días</strong>
+                <span>Próxima entrega</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="auth-card" aria-label="Formulario de acceso">
+            <div class="tab-switcher" role="tablist" aria-label="Opciones de acceso">
+              <input type="radio" name="auth-tabs" id="login-tab" checked />
+              <label for="login-tab" role="tab" aria-controls="login-panel">Iniciar sesión</label>
+
+              <input type="radio" name="auth-tabs" id="signup-tab" />
+              <label for="signup-tab" role="tab" aria-controls="signup-panel">Crear cuenta</label>
+            </div>
+
+            <div class="panel login-panel" id="login-panel">
+              <h3>Bienvenido otra vez</h3>
+              <form class="auth-form">
+                <div class="field-group">
+                  <label for="login-email">Correo electrónico</label>
+                  <input id="login-email" type="email" placeholder="tucorreo@uni.edu" />
+                </div>
+
+                <div class="field-group">
+                  <label for="login-password">Contraseña</label>
+                  <input id="login-password" type="password" placeholder="••••••••" />
+                </div>
+
+                <div class="form-row">
+                  <label class="checkbox-row">
+                    <input type="checkbox" />
+                    <span>Recordarme</span>
+                  </label>
+                  <a href="#" class="link-muted">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <button type="submit" class="button button-primary">Entrar</button>
+              </form>
+            </div>
+
+            <div class="panel signup-panel" id="signup-panel">
+              <h3>Crea tu cuenta</h3>
+              <form class="auth-form">
+                <div class="field-group">
+                  <label for="signup-name">Nombre completo</label>
+                  <input id="signup-name" type="text" placeholder="Ana García" />
+                </div>
+
+                <div class="field-group">
+                  <label for="signup-university">Universidad o carrera</label>
+                  <input id="signup-university" type="text" placeholder="Ingeniería de Sistemas" />
+                </div>
+
+                <div class="field-group">
+                  <label for="signup-email">Correo institucional</label>
+                  <input id="signup-email" type="email" placeholder="ana@uni.edu" />
+                </div>
+
+                <div class="field-group">
+                  <label for="signup-password">Contraseña</label>
+                  <input id="signup-password" type="password" placeholder="Crea una contraseña" />
+                </div>
+
+                <button type="submit" class="button button-primary">Crear cuenta gratis</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <p>ApexStudy</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

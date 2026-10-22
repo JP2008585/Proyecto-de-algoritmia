@@ -148,8 +148,7 @@
       .logout:active, .timer-actions button:active, .save-btn:active { transform: scale(0.96); }
       .hero {
         display: grid;
-        grid-template-columns: 1.3fr 0.7fr;
-        gap: 20px;
+        grid-template-columns: minmax(0, 1fr);
         margin-bottom: 24px;
       }
       .hero-card, .feature-box, .summary-card, .subject-card, .editor-card {
@@ -190,36 +189,36 @@
         color: var(--mint-deep);
         font-weight: 700;
       }
-      .hero-side {
-        display: grid;
-        gap: 18px;
-      }
       .feature-box {
-        padding: 22px 20px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.8fr);
+        align-items: center;
+        gap: 24px;
+        padding: 24px 28px;
         animation: fade-up 0.55s ease 0.12s both;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
       }
-      .feature-box.focus-box {
-        min-height: 168px;
-      }
-      .focus-box #focusSummary {
-        min-height: 96px;
-        align-content: flex-start;
-      }
-      .feature-box:hover { transform: translateY(-4px); box-shadow: 0 22px 44px rgba(20, 34, 38, 0.1); }
       .feature-box h3 {
-        margin: 0 0 12px;
-        font-size: 1.05rem;
+        margin: 0 0 8px;
+        color: var(--ink-soft);
+        font-size: 0.76rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .feature-caption {
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 0.94rem;
+        line-height: 1.55;
       }
       .daily-message {
         margin: 0;
-        padding: 14px 16px;
+        padding: 12px 16px;
         border-left: 4px solid var(--mint-deep);
         border-radius: 0 14px 14px 0;
         background: linear-gradient(135deg, rgba(0, 199, 177, 0.2), rgba(94, 219, 255, 0.08));
         color: var(--ink);
-        font-size: 1.08rem;
-        line-height: 1.55;
+        font-size: 1rem;
+        line-height: 1.45;
         font-weight: 800;
         letter-spacing: -0.02em;
         box-shadow: inset 0 0 0 1px rgba(30, 168, 122, 0.08);
@@ -229,39 +228,11 @@
         from { opacity: 0; transform: translateX(-8px); }
         to { opacity: 1; transform: translateX(0); }
       }
-      .chip-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-      .chip {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 8px 10px;
-        border-radius: 999px;
-        background: var(--mint-soft);
-        color: var(--mint);
-        font-size: 0.74rem;
-        font-weight: 700;
-        transition: transform 0.2s ease, background 0.2s ease;
-      }
-      .chip:hover { transform: translateY(-2px); background: rgba(117, 224, 191, 0.3); }
-      .recommendation-preview {
-        margin: 12px 0 0;
-        padding: 8px 10px;
-        border-left: 3px solid var(--mint-deep);
-        border-radius: 0 9px 9px 0;
-        background: rgba(117, 224, 191, 0.1);
-        color: var(--ink-soft);
-        font-size: 0.74rem;
-        line-height: 1.35;
-      }
       .summary-grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 18px;
-        margin-bottom: 28px;
+        gap: 16px;
+        margin-bottom: 30px;
       }
       .summary-card {
         padding: 18px 20px;
@@ -269,9 +240,7 @@
         transition: transform 0.25s ease, box-shadow 0.25s ease;
       }
       .summary-card.timer-card {
-        position: relative;
-        top: -28px;
-        padding: 22px 20px;
+        padding: 18px 20px;
         background: linear-gradient(145deg, rgba(0, 199, 177, 0.22), rgba(17, 44, 63, 0.9));
         border-color: rgba(111, 255, 233, 0.3);
       }
@@ -381,11 +350,45 @@
       .save-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(30, 168, 122, 0.24); }
       .subjects-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        align-items: stretch;
+        gap: 18px;
+      }
+      .section-heading {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        margin: 0 0 16px;
+      }
+      .section-heading h2 {
+        margin: 0;
+        font-size: clamp(1.25rem, 2vw, 1.65rem);
+        letter-spacing: -0.04em;
+      }
+      .section-heading p {
+        margin: 6px 0 0;
+        color: var(--ink-soft);
+        font-size: 0.84rem;
+      }
+      .section-link {
+        flex: 0 0 auto;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 9px 14px;
+        color: var(--mint);
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.2s ease;
+      }
+      .section-link:hover {
+        transform: translateY(-2px);
+        background: var(--mint-soft);
       }
       .subject-card {
-        padding: 18px 18px 16px;
+        min-width: 0;
+        padding: 22px;
         animation: fade-up 0.55s ease both;
         transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
       }
@@ -402,13 +405,17 @@
       .subject-header {
         display: flex;
         justify-content: space-between;
-        gap: 10px;
-        align-items: center;
-        margin-bottom: 14px;
+        gap: 14px;
+        align-items: flex-start;
+        min-height: 58px;
+        margin-bottom: 18px;
       }
       .subject-header h2 {
+        min-width: 0;
         margin: 0;
-        font-size: 1.1rem;
+        font-size: 1.04rem;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
       }
       .subject-badge {
         padding: 6px 9px;
@@ -418,25 +425,47 @@
         font-size: 0.7rem;
         font-weight: 800;
       }
+      .subject-badges {
+        display: flex;
+        flex: 0 0 auto;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 6px;
+      }
+      .credit-badge {
+        padding: 6px 9px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--ink-soft);
+        font-size: 0.68rem;
+        font-weight: 700;
+        white-space: nowrap;
+      }
       .grade-wrap {
         display: flex;
         justify-content: space-between;
-        align-items: end;
+        align-items: center;
         gap: 12px;
+        min-height: 84px;
+        padding: 14px 16px;
         margin-bottom: 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: linear-gradient(110deg, rgba(94, 219, 255, 0.09), rgba(111, 255, 233, 0.025));
       }
       .grade {
-        font-size: 2.2rem;
+        font-size: 2.65rem;
         font-weight: 800;
         letter-spacing: -0.08em;
+        line-height: 1;
       }
       .grade.low {
         color: #d9485f;
       }
       .trend {
-        color: var(--mint-deep);
+        color: var(--ink-soft);
         font-size: 0.76rem;
-        font-weight: 700;
+        text-align: right;
       }
       .mini-chart {
         height: 84px;
@@ -481,7 +510,7 @@
       }
       .metric-row {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 8px;
         margin-top: 8px;
       }
@@ -500,6 +529,7 @@
         display: block;
         margin-top: 6px;
         font-size: 0.98rem;
+        overflow-wrap: anywhere;
       }
       .bottom-row {
         display: flex;
@@ -541,6 +571,49 @@
         color: #b4233c;
         background: rgba(240, 111, 122, 0.16);
       }
+      .status.pending {
+        color: var(--ink-soft);
+        background: rgba(142, 175, 189, 0.12);
+      }
+      .edit-subject-link {
+        color: var(--mint);
+        font-size: 0.76rem;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .edit-subject-link:hover { text-decoration: underline; }
+      .chart-empty {
+        display: grid;
+        min-height: 84px;
+        margin: 6px 0 14px;
+        place-items: center;
+        border: 1px dashed var(--line);
+        border-radius: 14px;
+        color: var(--ink-soft);
+        font-size: 0.78rem;
+        text-align: center;
+      }
+      .grade-alert {
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        margin: 0 0 12px;
+        padding: 11px 12px;
+        border: 1px solid rgba(255, 192, 118, 0.28);
+        border-radius: 13px;
+        background: rgba(255, 161, 74, 0.09);
+        color: #ffe0bb;
+        font-size: 0.76rem;
+        line-height: 1.45;
+      }
+      .grade-alert a {
+        display: inline-block;
+        margin-top: 5px;
+        color: #ffd08f;
+        font-weight: 800;
+        text-underline-offset: 3px;
+      }
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
           animation-duration: 0.01ms !important;
@@ -574,18 +647,38 @@
       }
       @media (max-width: 1100px) {
         .hero { grid-template-columns: 1fr; }
+        .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .editor-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
         .subjects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
       @media (max-width: 720px) {
-        .summary-grid, .editor-grid, .subjects-grid { grid-template-columns: 1fr; }
-        .summary-card.timer-card { top: 0; }
+        .summary-grid, .editor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .subjects-grid { grid-template-columns: 1fr; }
         .topbar,
         .brand-area {
           flex-direction: column;
           align-items: flex-start;
         }
         .module-nav { flex-wrap: wrap; }
+        .feature-box { grid-template-columns: 1fr; gap: 14px; }
+      }
+      @media (max-width: 480px) {
+        .dashboard { width: min(100% - 20px, 1380px); margin-top: 12px; }
+        .topbar { padding: 12px 4px 18px; }
+        .topbar-actions { width: 100%; justify-content: space-between; }
+        .summary-grid { gap: 10px; margin-bottom: 24px; }
+        .summary-card, .summary-card.timer-card { padding: 14px; }
+        .summary-card strong { font-size: 1.6rem; }
+        .study-timer strong { font-size: 1.9rem; }
+        .feature-box { padding: 18px; }
+        .section-heading { align-items: flex-start; }
+        .section-link { padding: 8px 10px; font-size: 0.72rem; }
+        .subject-card { padding: 16px; }
+        .subject-header { gap: 8px; }
+        .subject-header h2 { font-size: 0.96rem; }
+        .subject-badges { flex-direction: column; align-items: flex-end; }
+        .grade-wrap { min-height: 76px; padding: 12px; }
+        .metric { padding: 9px; }
       }
     </style>
   </head>
@@ -611,16 +704,11 @@
         </div>
       </header>
 
-      <section class="hero">
-        <div class="hero-side">
-          <div class="feature-box">
-            <h3>Mensaje del día</h3>
+      <section class="hero" aria-label="Mensaje del día">
+        <div class="feature-box">
+          <div>
+            <h3>Un paso a la vez</h3>
             <p class="daily-message" id="motivationMessage" aria-live="polite"></p>
-          </div>
-
-          <div class="feature-box focus-box">
-            <h3>Foco esta semana</h3>
-            <div class="chip-row" id="focusSummary"></div>
           </div>
         </div>
       </section>
@@ -654,9 +742,19 @@
         </article>
       </section>
 
-      <section class="subjects-grid" id="subjectsGrid"></section>
+      <section aria-labelledby="subjectsHeading">
+        <div class="section-heading">
+          <div>
+            <h2 id="subjectsHeading">Materias de tu semestre</h2>
+            <p>Consulta tus notas, créditos y progreso por asignatura.</p>
+          </div>
+          <a class="section-link" href="/materias.html">Editar materias</a>
+        </div>
+        <div class="subjects-grid" id="subjectsGrid"></div>
+      </section>
     </div>
 
+    <script src="/curriculum.js"></script>
     <script>
       const token = sessionStorage.getItem("studytrack_token");
       if (!token) {
@@ -664,59 +762,69 @@
       }
 
       const STORAGE_KEY = "studytrack_subjects";
-      const subjectTemplates = [
-        { name: "Programación Web", short: "Web", corte1: 4.5, corte2: 4.5, corte3: 4.5, participation: 0, attendance: 95, tasks: 4, chart: [45, 56, 63, 72, 76, 90] },
-        { name: "Base de Datos", short: "DB", corte1: 4.3, corte2: 4.3, corte3: 4.3, participation: 0, attendance: 92, tasks: 3, chart: [40, 46, 58, 63, 68, 84] },
-        { name: "Algoritmia", short: "Algo", corte1: 4.0, corte2: 4.0, corte3: 4.0, participation: 0, attendance: 90, tasks: 5, chart: [32, 38, 42, 51, 69, 79] },
-        { name: "Matemática Discreta", short: "MD", corte1: 3.9, corte2: 3.9, corte3: 3.9, participation: 0, attendance: 88, tasks: 4, chart: [29, 36, 44, 49, 61, 78] },
-        { name: "Sistemas Operativos", short: "SO", corte1: 4.2, corte2: 4.2, corte3: 4.2, participation: 0, attendance: 94, tasks: 3, chart: [38, 46, 57, 62, 76, 84] },
-        { name: "Arquitectura de Computadores", short: "AC", corte1: 4.1, corte2: 4.1, corte3: 4.1, participation: 0, attendance: 91, tasks: 4, chart: [35, 44, 50, 65, 74, 82] }
-      ];
+      function getDefaultSubjects(profile = {}) {
+        const semester = Number(profile.semester);
+        const semesterIndex = Number.isInteger(semester) && semester >= 1 && semester <= window.studyCurriculum.length
+          ? semester - 1
+          : 1;
+        const courses = Array.isArray(profile.subjects) && profile.subjects.length
+          ? profile.subjects
+          : window.studyCurriculum[semesterIndex].subjects;
 
-      let requestedSubjectCount = 6;
-
-      function getDefaultSubjects(count) {
-        return Array.from({ length: count }, (_, index) => {
-          return {
-            name: `Materia ${index + 1}`,
-            short: `M${index + 1}`,
-            corte1: 0,
-            corte2: 0,
-            corte3: 0,
-            participation: 0,
-            attendance: 0,
-            tasks: 0,
-            chart: [20, 30, 40]
-          };
-        });
+        return courses.map(course => ({
+          ...course,
+          focus: "",
+          gradedCuts: [],
+          corte1: 0,
+          corte2: 0,
+          corte3: 0,
+          participation: 0,
+          attendance: 0,
+          tasks: 0,
+          chart: [20, 30, 40]
+        }));
       }
 
-      function getSubjects() {
+      function getSubjects(profile) {
+        const defaults = getDefaultSubjects(profile);
         const saved = localStorage.getItem(STORAGE_KEY);
         if (!saved) {
-          const defaults = getDefaultSubjects(requestedSubjectCount);
           localStorage.setItem(STORAGE_KEY, JSON.stringify(defaults));
           return defaults;
         }
 
         try {
           const parsed = JSON.parse(saved);
-          if (!Array.isArray(parsed) || !parsed.length) return getDefaultSubjects(requestedSubjectCount);
-          return parsed.map(subject => ({
-            ...subject,
-            focus: typeof subject.focus === "string" ? subject.focus : "",
-            participation: Number(subject.participation) || 0,
-            corte1: Number(subject.corte1 ?? subject.grade) || 0,
-            corte2: Number(subject.corte2 ?? subject.grade) || 0,
-            corte3: Number(subject.corte3 ?? subject.grade) || 0
-          }));
+          if (!Array.isArray(parsed) || !parsed.length) return defaults;
+          const savedByName = new Map(parsed.map(subject => [
+            window.studyNormalizeSubject(subject.name),
+            subject
+          ]));
+          const subjects = defaults.map((course, index) => {
+            const savedSubject = savedByName.get(window.studyNormalizeSubject(course.name)) ||
+              (/^Materia \d+$/i.test(parsed[index]?.name || "") ? parsed[index] : {});
+            return {
+              ...course,
+              ...savedSubject,
+              name: course.name,
+              short: course.short,
+              credits: course.credits,
+              focus: typeof savedSubject.focus === "string" ? savedSubject.focus : "",
+              gradedCuts: Array.isArray(savedSubject.gradedCuts)
+                ? savedSubject.gradedCuts.filter(name => ["corte1", "corte2", "corte3"].includes(name))
+                : ["corte1", "corte2", "corte3"].filter(name => Number(savedSubject[name]) > 0),
+              participation: Number(savedSubject.participation) || 0,
+              corte1: Number(savedSubject.corte1 ?? savedSubject.grade) || 0,
+              corte2: Number(savedSubject.corte2 ?? savedSubject.grade) || 0,
+              corte3: Number(savedSubject.corte3 ?? savedSubject.grade) || 0,
+              chart: Array.isArray(savedSubject.chart) ? savedSubject.chart : course.chart
+            };
+          });
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(subjects));
+          return subjects;
         } catch (error) {
-          return getDefaultSubjects(requestedSubjectCount);
+          return defaults;
         }
-      }
-
-      function saveSubjects(subjects) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(subjects));
       }
 
       async function loadUserProfile() {
@@ -746,11 +854,14 @@
       }
 
       function getSemesterAverage(subjects) {
-        if (!subjects.length) return 0;
-        return subjects.reduce(
+        const gradedSubjects = subjects.filter(subject =>
+          subject.gradedCuts.length > 0 || Number(subject.participation) > 0
+        );
+        if (!gradedSubjects.length) return null;
+        return gradedSubjects.reduce(
           (sum, subject) => sum + getFinalGrade(getBaseGrade(subject), subject.participation),
           0
-        ) / subjects.length;
+        ) / gradedSubjects.length;
       }
 
       function showMotivationalMessage() {
@@ -930,26 +1041,34 @@
         grid.innerHTML = subjects.map(subject => {
           const baseGrade = getBaseGrade(subject);
           const grade = getFinalGrade(baseGrade, subject.participation);
-          const isLow = grade < 3;
-          const status = getAutomaticStatus(grade);
+          const hasGrades = subject.gradedCuts.length > 0 ||
+            Number(subject.participation) > 0;
+          const isLow = hasGrades && grade < 3;
+          const status = hasGrades ? getAutomaticStatus(grade) : "Sin notas";
+          const lowCuts = [
+            ["Corte 1", subject.corte1],
+            ["Corte 2", subject.corte2],
+            ["Corte 3", subject.corte3]
+          ].filter(([cut, value]) =>
+            subject.gradedCuts.includes(cut.toLowerCase().replace(" ", "")) && Number(value) < 3
+          );
           const cutProgress = [subject.corte1, subject.corte2, subject.corte3]
             .map(value => Math.min(100, Math.max(0, Number(value) * 20)));
 
           return `
           <article class="subject-card">
             <div class="subject-header">
-              <h2>${subject.name}</h2>
-              <span class="subject-badge">${subject.short}</span>
+              <h2>${window.studyEscapeHtml(subject.name)}</h2>
+              <div class="subject-badges">
+                <span class="subject-badge">${window.studyEscapeHtml(subject.short)}</span>
+                <span class="credit-badge">${Number(subject.credits) || 0} créditos</span>
+              </div>
             </div>
-            <div class="chip-row">
-              <span class="chip">${subject.focus || "Sin foco definido"}</span>
-            </div>
-            ${subject.recommendation ? `<p class="recommendation-preview"><strong>Recomendación:</strong> ${subject.recommendation}</p>` : ""}
             <div class="grade-wrap">
-              <div class="grade${isLow ? " low" : ""}">${grade.toFixed(1)}</div>
-              <div class="trend">Nota final</div>
+              <div class="grade${isLow ? " low" : ""}">${hasGrades ? grade.toFixed(1) : "—"}</div>
+              <div class="trend">${hasGrades ? "Nota final estimada" : "Registra tus notas<br>para ver tu promedio"}</div>
             </div>
-            <div class="mini-chart" aria-label="Gráfico de progreso de ${subject.name}">
+            ${hasGrades ? `<div class="mini-chart" aria-label="Gráfico de progreso de ${window.studyEscapeHtml(subject.name)}">
               ${cutProgress.map((value, index) => {
                 const gradeValue = (value / 20).toFixed(1);
                 return `<div class="chart-column" title="Corte ${index + 1}: ${gradeValue}">
@@ -958,7 +1077,13 @@
                   <span class="chart-label">Corte ${index + 1}</span>
                 </div>`;
               }).join("")}
-            </div>
+            </div>` : '<div class="chart-empty">El progreso de tus cortes aparecerá aquí</div>'}
+            ${lowCuts.length ? `<div class="grade-alert" role="status">
+              <span aria-hidden="true">⚠</span>
+              <span>Las notas de ${lowCuts.map(([cut, value]) => `${cut}: ${Number(value).toFixed(1)}`).join(" · ")} están por debajo de 3. Refuerza esta materia con recursos y ejercicios.<br>
+                <a href="/recomendaciones.html">Ver recomendaciones de estudio →</a>
+              </span>
+            </div>` : ""}
             <div class="metric-row">
               <div class="metric">
                 <span class="metric-label">Asist.</span>
@@ -978,63 +1103,28 @@
               </div>
             </div>
             <div class="bottom-row">
-              <div class="progress${isLow ? " low" : ""}"><span style="width: ${Math.min(100, Math.max(0, grade * 20))}%"></span></div>
-              <span class="status${isLow ? " low" : ""}">${status}</span>
+              <div class="progress${isLow ? " low" : ""}" aria-label="${hasGrades ? `Progreso de nota: ${Math.round(grade * 20)}%` : "Sin notas registradas"}"><span style="width: ${hasGrades ? Math.min(100, Math.max(0, grade * 20)) : 0}%"></span></div>
+              <span class="status${isLow ? " low" : !hasGrades ? " pending" : ""}">${status}</span>
+            </div>
+            <div class="bottom-row">
+              <span class="trend">Créditos: ${Number(subject.credits) || 0}</span>
+              <a class="edit-subject-link" href="/materias.html">Actualizar notas <span aria-hidden="true">→</span></a>
             </div>
           </article>
         `;
         }).join("");
 
-        document.getElementById("avgLabel").textContent = getSemesterAverage(subjects).toFixed(1);
+        const average = getSemesterAverage(subjects);
+        document.getElementById("avgLabel").textContent = average === null ? "—" : average.toFixed(1);
         document.getElementById("subjectCount").textContent = subjects.length;
-        const focusSummary = document.getElementById("focusSummary");
-        const focuses = subjects
-          .map(subject => subject.focus)
-          .filter(Boolean)
-          .slice(0, 6);
-        focusSummary.innerHTML = focuses.length
-          ? focuses.map(focus => `<span class="chip">${focus}</span>`).join("")
-          : '<span class="chip">Define el foco de cada materia</span>';
-      }
-
-      function handleSubmit(event) {
-        event.preventDefault();
-        const form = event.target;
-        const subjects = getSubjects();
-
-        subjects.forEach((subject, index) => {
-          const nextName = form.elements[`name-${index}`].value.trim() || subject.name;
-          const nextShort = form.elements[`short-${index}`].value.trim() || subject.short;
-          const nextFocus = form.elements[`focus-${index}`].value.trim();
-          const nextCorte1 = Number(form.elements[`corte1-${index}`].value) || 0;
-          const nextCorte2 = Number(form.elements[`corte2-${index}`].value) || 0;
-          const nextCorte3 = Number(form.elements[`corte3-${index}`].value) || 0;
-          const nextParticipation = Number(form.elements[`participation-${index}`].value) || 0;
-          const nextAttendance = Number(form.elements[`attendance-${index}`].value) || subject.attendance;
-          const nextTasks = Number(form.elements[`tasks-${index}`].value) || subject.tasks;
-
-          subject.name = nextName;
-          subject.short = nextShort;
-          subject.focus = nextFocus;
-          subject.corte1 = Math.min(5, Math.max(0, nextCorte1));
-          subject.corte2 = Math.min(5, Math.max(0, nextCorte2));
-          subject.corte3 = Math.min(5, Math.max(0, nextCorte3));
-          subject.participation = Math.min(5, Math.max(0, nextParticipation));
-          subject.attendance = Math.min(100, Math.max(0, nextAttendance));
-          subject.tasks = nextTasks;
-          subject.chart = subject.chart.length ? subject.chart : [40, 50, 60, 70, 80, 90];
-        });
-
-        saveSubjects(subjects);
-        renderCards(subjects);
       }
 
       async function init() {
         const profile = await loadUserProfile();
-        requestedSubjectCount = Math.min(20, Math.max(1, Number(profile.subjectsCount) || 6));
+        const semester = Number(profile.semester) || 2;
         document.getElementById("careerPill").textContent =
-          profile.career ? `Semestre 2 · ${profile.career}` : "Semestre 2";
-        const subjects = getSubjects();
+          profile.career ? `Semestre ${semester} · ${profile.career}` : `Semestre ${semester}`;
+        const subjects = getSubjects(profile);
         renderCards(subjects);
         showMotivationalMessage();
         renderTimer();

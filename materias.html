@@ -129,18 +129,96 @@
         margin: 14px 0 0;
         color: var(--muted);
       }
+      .subjects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+        gap: 14px;
+        margin-bottom: 22px;
+      }
+      .subject-tile {
+        display: flex;
+        aspect-ratio: 1;
+        align-self: start;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        min-width: 0;
+        min-height: 0;
+        height: auto;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: linear-gradient(145deg, rgba(17, 44, 63, 0.9), rgba(9, 27, 43, 0.82));
+        box-shadow: var(--shadow);
+        color: var(--ink);
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+        animation: card-enter .45s ease both;
+        transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
+      }
+      .subject-tile:hover {
+        transform: translateY(-4px);
+        border-color: rgba(111, 255, 233, .48);
+        box-shadow: 0 18px 38px rgba(0, 0, 0, .24);
+      }
+      .subject-tile:focus-visible {
+        outline: 2px solid var(--mint);
+        outline-offset: 3px;
+      }
+      .subject-tile[aria-pressed="true"] {
+        border-color: var(--mint);
+        background: linear-gradient(145deg, rgba(0, 199, 177, .2), rgba(9, 27, 43, .94));
+        box-shadow: 0 0 0 2px rgba(111, 255, 233, .16), var(--shadow);
+      }
+      .tile-top,
+      .tile-bottom {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .tile-icon {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+        place-items: center;
+        border: 1px solid rgba(111, 255, 233, .2);
+        border-radius: 13px;
+        background: var(--mint-soft);
+        color: var(--mint);
+        font-size: .78rem;
+        font-weight: 800;
+      }
+      .tile-credits,
+      .tile-grade {
+        color: var(--muted);
+        font-size: .72rem;
+        font-weight: 700;
+      }
+      .tile-name {
+        display: -webkit-box;
+        overflow: hidden;
+        width: 100%;
+        color: var(--ink);
+        font-size: .92rem;
+        font-weight: 800;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+        -webkit-box-orient: vertical;
+        -webkit-line-lcamp: 3;
+      }
+      .tile-grade {
+        color: var(--mint);
+      }
+      .tile-grade.needs-support { color: #ffc076; }
       .subject-editor {
         padding: 22px;
-        margin-bottom: 16px;
         animation: card-enter .55s ease both;
-        transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
       }
-      .subject-editor:hover { transform: translateY(-5px); border-color: rgba(30,168,122,.28); box-shadow: 0 24px 44px rgba(20,34,38,.11); }
-      .subject-editor:nth-child(2) { animation-delay: .08s; }
-      .subject-editor:nth-child(3) { animation-delay: .16s; }
-      .subject-editor:nth-child(4) { animation-delay: .24s; }
-      .subject-editor:nth-child(5) { animation-delay: .32s; }
-      .subject-editor:nth-child(6) { animation-delay: .4s; }
       .subject-title {
         display: flex;
         justify-content: space-between;
@@ -149,6 +227,33 @@
         margin-bottom: 16px;
       }
       .subject-title h2 { margin: 0; font-size: 1.15rem; }
+      .subject-subtitle {
+        margin: -6px 0 18px;
+        color: var(--muted);
+        font-size: .82rem;
+        line-height: 1.5;
+      }
+      .grade-alert {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin: 0 0 18px;
+        padding: 13px 15px;
+        border: 1px solid rgba(255, 192, 118, .32);
+        border-radius: 14px;
+        background: rgba(255, 161, 74, .1);
+        color: #ffe0bb;
+        font-size: .84rem;
+        line-height: 1.5;
+      }
+      .grade-alert[hidden] { display: none; }
+      .grade-alert a {
+        display: inline-block;
+        margin-left: 4px;
+        color: #ffd08f;
+        font-weight: 800;
+        text-underline-offset: 3px;
+      }
       .subject-tag {
         padding: 6px 10px;
         border-radius: 999px;
@@ -168,7 +273,7 @@
         font-size: 0.76rem;
         font-weight: 700;
       }
-      input {
+      input, select {
         width: 100%;
         border: 1px solid var(--line);
         border-radius: 11px;
@@ -178,7 +283,7 @@
         font: inherit;
         transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
       }
-      input:focus {
+      input:focus, select:focus {
         outline: 2px solid var(--mint);
         outline-offset: 1px;
         box-shadow: 0 6px 16px rgba(30,168,122,.12);
@@ -198,6 +303,13 @@
         color: var(--mint-deep);
         font-weight: 700;
         text-align: center;
+      }
+      @media (max-width: 500px) {
+        .subjects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+        .subject-tile { padding: 14px; border-radius: 18px; }
+        .tile-name { font-size: .82rem; }
+        .tile-credits, .tile-grade { font-size: .65rem; }
+        .subject-editor { padding: 17px; }
       }
       @media (max-width: 760px) {
         .topbar { align-items: flex-start; flex-direction: column; }
@@ -252,88 +364,203 @@
       </header>
 
       <section class="intro">
-        <p class="eyebrow">Semestre 2 · Ingeniería de Sistemas</p>
-        <h1>Editar datos de materias</h1>
+        <p class="eyebrow" id="semesterLabel">Plan de estudios</p>
+        <h1>Materias del semestre</h1>
+        <p>Elige una tarjeta para revisar o actualizar tus notas y tu progreso.</p>
       </section>
 
       <form id="subjectsForm">
-        <div id="subjectsEditor"></div>
+        <section class="subjects-grid" id="subjectsGrid" aria-label="Materias de tu semestre"></section>
+        <section id="subjectsEditor" aria-live="polite"></section>
         <div class="save-row"><button class="save-button" type="submit">Guardar cambios</button></div>
-        <div class="notice" id="notice">Cambios guardados correctamente.</div>
+        <div class="notice" id="notice" role="status" aria-live="polite">Cambios guardados correctamente.</div>
       </form>
     </main>
 
+    <script src="/curriculum.js"></script>
     <script>
       const token = sessionStorage.getItem("studytrack_token");
       if (!token) window.location.href = "/";
 
       const STORAGE_KEY = "studytrack_subjects";
-      const defaults = Array.from({ length: 6 }, (_, index) => ({
-        name: `Materia ${index + 1}`,
-        short: `M${index + 1}`,
-        corte1: 0,
-        corte2: 0,
-        corte3: 0,
-        participation: 0,
-        attendance: 0,
-        tasks: 0
-      }));
+      let subjects = [];
+      let selectedSubjectIndex = 0;
 
-      function getSubjects() {
+      async function loadUserProfile() {
+        const response = await fetch("/api/auth/profile", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (!response.ok) throw new Error("No se pudo cargar el perfil del usuario");
+        return response.json();
+      }
+
+      function getSubjects(profile) {
+        const semester = Number(profile.semester);
+        const semesterIndex = Number.isInteger(semester) && semester >= 1 && semester <= window.studyCurriculum.length
+          ? semester - 1
+          : 1;
+        const courses = Array.isArray(profile.subjects) && profile.subjects.length
+          ? profile.subjects
+          : window.studyCurriculum[semesterIndex].subjects;
+        let saved = [];
+
         try {
-          const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-          return Array.isArray(saved) && saved.length ? saved : defaults;
+          const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY));
+          if (Array.isArray(parsed)) saved = parsed;
         } catch (error) {
-          return defaults;
+          saved = [];
         }
+
+        const savedByName = new Map(saved.map(subject => [
+          window.studyNormalizeSubject(subject.name),
+          subject
+        ]));
+
+        return courses.map((course, index) => {
+          const stored = savedByName.get(window.studyNormalizeSubject(course.name)) ||
+            (/^Materia \d+$/i.test(saved[index]?.name || "") ? saved[index] : {});
+          return {
+            ...course,
+            ...stored,
+            name: course.name,
+            short: course.short,
+            credits: course.credits,
+            gradedCuts: Array.isArray(stored.gradedCuts)
+              ? stored.gradedCuts.filter(name => ["corte1", "corte2", "corte3"].includes(name))
+              : ["corte1", "corte2", "corte3"].filter(name => Number(stored[name]) > 0),
+            corte1: Number(stored.corte1 ?? stored.grade) || 0,
+            corte2: Number(stored.corte2 ?? stored.grade) || 0,
+            corte3: Number(stored.corte3 ?? stored.grade) || 0,
+            participation: Number(stored.participation) || 0,
+            attendance: Number(stored.attendance) || 0,
+            tasks: Number(stored.tasks) || 0
+          };
+        });
       }
 
       function render() {
-        document.getElementById("subjectsEditor").innerHTML = getSubjects().map((subject, index) => `
+        const grid = document.getElementById("subjectsGrid");
+        grid.innerHTML = subjects.map((subject, index) => {
+          const hasGrades = subject.gradedCuts.length > 0;
+          const needsSupport = subject.gradedCuts
+            .some(name => Number(subject[name]) < 3);
+          const finalGrade = Number(subject.corte1) * .3 +
+            Number(subject.corte2) * .3 + Number(subject.corte3) * .4;
+
+          return `
+            <button class="subject-tile" type="button" data-subject-index="${index}"
+              aria-pressed="${index === selectedSubjectIndex}">
+              <span class="tile-top">
+                <span class="tile-icon">${window.studyEscapeHtml(subject.short)}</span>
+                <span class="tile-credits">${Number(subject.credits) || 0} créditos</span>
+              </span>
+              <span class="tile-name">${window.studyEscapeHtml(subject.name)}</span>
+              <span class="tile-bottom">
+                <span class="tile-grade${needsSupport ? " needs-support" : ""}">${needsSupport ? "⚠ Requiere apoyo" : hasGrades ? `Nota ${finalGrade.toFixed(1)}` : "Sin notas aún"}</span>
+                <span aria-hidden="true">›</span>
+              </span>
+            </button>
+          `;
+        }).join("");
+
+        grid.querySelectorAll(".subject-tile").forEach(tile => {
+          tile.addEventListener("click", () => {
+            saveActiveSubject(document.getElementById("subjectsForm"), false);
+            selectedSubjectIndex = Number(tile.dataset.subjectIndex);
+            render();
+            grid.querySelector(`[data-subject-index="${selectedSubjectIndex}"]`).focus();
+          });
+        });
+
+        const subject = subjects[selectedSubjectIndex];
+        document.getElementById("subjectsEditor").innerHTML = `
           <section class="subject-editor">
-            <div class="subject-title"><h2>${subject.name}</h2><span class="subject-tag">${subject.short}</span></div>
+            <div class="subject-title">
+              <h2>${window.studyEscapeHtml(subject.name)}</h2>
+              <span class="subject-tag">${Number(subject.credits) || 0} créditos</span>
+            </div>
+            <p class="subject-subtitle">Actualiza tu avance en esta materia. Las notas se calculan sobre 5.</p>
+            <div class="grade-alert" id="gradeAlert" role="status" aria-live="polite" hidden></div>
             <div class="fields">
-              <div class="field"><label>Nombre</label><input name="name-${index}" value="${subject.name}" /></div>
-              <div class="field"><label>Abreviatura</label><input name="short-${index}" value="${subject.short}" /></div>
-              <div class="field"><label>¿En qué te vas a enfocar?</label><input name="focus-${index}" value="${subject.focus || ""}" placeholder="Parcial, proyecto, asistencia..." /></div>
-              <div class="field"><label>Corte 1 (30%)</label><input name="corte1-${index}" type="number" min="0" max="5" step="0.1" value="${subject.corte1 ?? subject.grade ?? 0}" /></div>
-              <div class="field"><label>Corte 2 (30%)</label><input name="corte2-${index}" type="number" min="0" max="5" step="0.1" value="${subject.corte2 ?? subject.grade ?? 0}" /></div>
-              <div class="field"><label>Corte 3 (40%)</label><input name="corte3-${index}" type="number" min="0" max="5" step="0.1" value="${subject.corte3 ?? subject.grade ?? 0}" /></div>
-              <div class="field"><label>Participación</label><input name="participation-${index}" type="number" min="0" max="5" step="0.1" value="${subject.participation || 0}" /></div>
-              <div class="field"><label>Asistencia %</label><input name="attendance-${index}" type="number" min="0" max="100" value="${subject.attendance || 0}" /></div>
-              <div class="field"><label>Tareas</label><input name="tasks-${index}" type="number" min="0" value="${subject.tasks || 0}" /></div>
+              <div class="field"><label for="corte1">Corte 1 (30%)</label><input id="corte1" name="corte1" type="number" min="0" max="5" step="0.1" value="${subject.gradedCuts.includes("corte1") ? subject.corte1 : ""}" /></div>
+              <div class="field"><label for="corte2">Corte 2 (30%)</label><input id="corte2" name="corte2" type="number" min="0" max="5" step="0.1" value="${subject.gradedCuts.includes("corte2") ? subject.corte2 : ""}" /></div>
+              <div class="field"><label for="corte3">Corte 3 (40%)</label><input id="corte3" name="corte3" type="number" min="0" max="5" step="0.1" value="${subject.gradedCuts.includes("corte3") ? subject.corte3 : ""}" /></div>
+              <div class="field"><label for="participation">Participación</label><input id="participation" name="participation" type="number" min="0" max="5" step="0.1" value="${subject.participation || 0}" /></div>
+              <div class="field"><label for="attendance">Asistencia (%)</label><input id="attendance" name="attendance" type="number" min="0" max="100" value="${subject.attendance || 0}" /></div>
+              <div class="field"><label for="tasks">Tareas completadas</label><input id="tasks" name="tasks" type="number" min="0" value="${subject.tasks || 0}" /></div>
             </div>
           </section>
-        `).join("");
+        `;
+        updateGradeAlert();
+        ["corte1", "corte2", "corte3"].forEach(name => {
+          document.getElementById(name).addEventListener("input", updateGradeAlert);
+        });
+      }
+
+      function updateGradeAlert() {
+        const alert = document.getElementById("gradeAlert");
+        if (!alert) return;
+        const lowCuts = ["corte1", "corte2", "corte3"]
+          .map(name => ({ name: name.replace("corte", "Corte "), input: document.getElementById(name) }))
+          .filter(cut => cut.input.value.trim() !== "" && Number(cut.input.value) < 3)
+          .map(cut => ({ name: cut.name, value: Number(cut.input.value) }));
+
+        alert.hidden = lowCuts.length === 0;
+        if (lowCuts.length) {
+          alert.innerHTML = `<span aria-hidden="true">⚠</span><span>${lowCuts.map(cut =>
+            `${cut.name}: ${cut.value.toFixed(1)}`
+          ).join(" · ")}. Tienes notas de corte por debajo de 3. Refuerza esta materia con nuestras <a href="/recomendaciones.html">recomendaciones de estudio</a>.</span>`;
+        } else {
+          alert.textContent = "";
+        }
+      }
+
+      function saveActiveSubject(form, showNotice) {
+        const subject = subjects[selectedSubjectIndex];
+        subject.gradedCuts = ["corte1", "corte2", "corte3"]
+          .filter(name => form.elements.namedItem(name).value.trim() !== "");
+        subject.corte1 = Math.min(5, Math.max(0, Number(form.elements.namedItem("corte1").value) || 0));
+        subject.corte2 = Math.min(5, Math.max(0, Number(form.elements.namedItem("corte2").value) || 0));
+        subject.corte3 = Math.min(5, Math.max(0, Number(form.elements.namedItem("corte3").value) || 0));
+        subject.participation = Math.min(5, Math.max(0, Number(form.elements.namedItem("participation").value) || 0));
+        subject.attendance = Math.min(100, Math.max(0, Number(form.elements.namedItem("attendance").value) || 0));
+        subject.tasks = Math.max(0, Number(form.elements.namedItem("tasks").value) || 0);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(subjects));
+
+        if (showNotice) {
+          const notice = document.getElementById("notice");
+          notice.textContent = "Cambios guardados correctamente.";
+          notice.style.display = "block";
+          render();
+          setTimeout(() => { notice.style.display = "none"; }, 2500);
+        }
       }
 
       document.getElementById("subjectsForm").addEventListener("submit", event => {
         event.preventDefault();
-        const form = event.target;
-        const subjects = getSubjects();
-        subjects.forEach((subject, index) => {
-          subject.name = form.elements[`name-${index}`].value.trim() || subject.name;
-          subject.short = form.elements[`short-${index}`].value.trim() || subject.short;
-          subject.focus = form.elements[`focus-${index}`].value.trim();
-          subject.corte1 = Math.min(5, Math.max(0, Number(form.elements[`corte1-${index}`].value) || 0));
-          subject.corte2 = Math.min(5, Math.max(0, Number(form.elements[`corte2-${index}`].value) || 0));
-          subject.corte3 = Math.min(5, Math.max(0, Number(form.elements[`corte3-${index}`].value) || 0));
-          subject.participation = Math.min(5, Math.max(0, Number(form.elements[`participation-${index}`].value) || 0));
-          subject.attendance = Math.min(100, Math.max(0, Number(form.elements[`attendance-${index}`].value) || 0));
-          subject.tasks = Math.max(0, Number(form.elements[`tasks-${index}`].value) || 0);
-        });
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(subjects));
-        const notice = document.getElementById("notice");
-        notice.style.display = "block";
-        setTimeout(() => { notice.style.display = "none"; }, 2500);
+        saveActiveSubject(event.target, true);
       });
+
+      async function init() {
+        const profile = await loadUserProfile();
+        const semester = Number(profile.semester) || 2;
+        document.getElementById("semesterLabel").textContent =
+          `Semestre ${semester} · ${profile.career || "Ingeniería de Sistemas"}`;
+        subjects = getSubjects(profile);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(subjects));
+        render();
+      }
 
       function logout() {
         sessionStorage.removeItem("studytrack_token");
         window.location.href = "/";
       }
 
-      render();
+      init().catch(error => {
+        console.error(error);
+        document.getElementById("notice").textContent = error.message;
+        document.getElementById("notice").style.display = "block";
+      });
     </script>
   </body>
 </html>
